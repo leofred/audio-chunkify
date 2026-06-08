@@ -1,5 +1,9 @@
 # audio-chunkify
 
+[![CI](https://github.com/leofred/audio-chunkify/actions/workflows/ci.yml/badge.svg)](https://github.com/leofred/audio-chunkify/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/audio-chunkify.svg)](https://www.npmjs.com/package/audio-chunkify)
+[![license](https://img.shields.io/npm/l/audio-chunkify.svg)](https://github.com/leofred/audio-chunkify/blob/main/LICENSE)
+
 **Record audio in the browser and automatically split it into chunks — by silence, by time, or both.**
 
 Framework agnostic · Zero dependencies · TypeScript · ESM
