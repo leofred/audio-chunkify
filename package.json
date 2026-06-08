@@ -51,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/leofred/audio-chunkify"
+    "url": "git+https://github.com/leofred/audio-chunkify.git"
   },
   "bugs": {
     "url": "https://github.com/leofred/audio-chunkify/issues"
