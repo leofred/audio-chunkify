@@ -69,7 +69,7 @@ export class AudioChunkify {
   private _currentChunkIndex = 0
   private _processingChunk = false
   private _isChunkSplit = false
-  private _lastChunkEnd = 0
+  private _lastChunkEnd: number | null = null
   private _silenceStartForChunking: number | null = null
   private _chunkSplitIntervalId: ReturnType<typeof setInterval> | null = null
   private _onChunkProcessedCallback:
@@ -398,7 +398,7 @@ export class AudioChunkify {
     this._currentChunkIndex = 0
     this._processingChunk = false
     this._isChunkSplit = false
-    this._lastChunkEnd = 0
+    this._lastChunkEnd = null
     this._silenceStartForChunking = null
     this._pauseStartTime = null
     this._totalPausedTime = 0
@@ -597,7 +597,7 @@ export class AudioChunkify {
 
   private _shouldSplitChunk(): boolean {
     if (this._mediaRecorder?.state === 'paused') return false
-    if (!this._lastChunkEnd) return false
+    if (this._lastChunkEnd === null) return false
 
     const currentTime = this._now()
     const elapsed = currentTime - this._lastChunkEnd
@@ -736,7 +736,7 @@ export class AudioChunkify {
       }
       this._startSilenceChecking()
 
-      if (this._lastChunkEnd === 0) {
+      if (this._lastChunkEnd === null) {
         this._lastChunkEnd = this._now()
       }
 
@@ -764,7 +764,9 @@ export class AudioChunkify {
       if (this._pauseStartTime !== null) {
         const pausedDuration = this._now() - this._pauseStartTime
         this._totalPausedTime += pausedDuration
-        this._lastChunkEnd += pausedDuration
+        if (this._lastChunkEnd !== null) {
+          this._lastChunkEnd += pausedDuration
+        }
         this._pauseStartTime = null
       }
 
@@ -804,7 +806,7 @@ export class AudioChunkify {
         this._silenceTime = 0
         this._audioChunks = []
         this._currentChunkIndex = 0
-        this._lastChunkEnd = 0
+        this._lastChunkEnd = null
         this._silenceStartForChunking = null
         this._pauseStartTime = null
         this._totalPausedTime = 0
@@ -837,7 +839,7 @@ export class AudioChunkify {
       }
 
       const duration =
-        this._lastChunkEnd > 0
+        this._lastChunkEnd !== null
           ? now - this._lastChunkEnd - pausedCompensation
           : 0
 
