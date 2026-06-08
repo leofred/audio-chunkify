@@ -1,0 +1,57 @@
+{
+  "name": "audio-chunkify",
+  "version": "1.0.0",
+  "description": "Record audio in the browser and automatically split it into chunks — by silence, time, or both. Framework agnostic, zero dependencies.",
+  "author": "",
+  "license": "MIT",
+  "keywords": [
+    "audio",
+    "chunk",
+    "chunking",
+    "audio-chunking",
+    "audio-split",
+    "mediarecorder",
+    "audio-recording",
+    "silence-detection",
+    "stream-mixing",
+    "web-audio",
+    "browser",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/audio-chunkify"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/audio-chunkify/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/audio-chunkify#readme"
+}
