@@ -2,7 +2,7 @@
   "name": "audio-chunkify",
   "version": "1.0.0",
   "description": "Record audio in the browser and automatically split it into chunks — by silence, time, or both. Framework agnostic, zero dependencies.",
-  "author": "",
+  "author": "Leandro Frederico",
   "license": "MIT",
   "keywords": [
     "audio",
@@ -48,10 +48,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/audio-chunkify"
+    "url": "https://github.com/leofred/audio-chunkify"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/audio-chunkify/issues"
+    "url": "https://github.com/leofred/audio-chunkify/issues"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/audio-chunkify#readme"
+  "homepage": "https://github.com/leofred/audio-chunkify#readme"
 }
