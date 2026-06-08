@@ -5,5 +5,6 @@ export type {
   RecorderCreateOptions,
   ChunkOptions,
   ChunkProcessedPayload,
+  DestroyOptions,
   RecorderState,
 } from './types.js'

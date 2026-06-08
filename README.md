@@ -150,9 +150,26 @@ Dynamically add or remove streams from the mix at any time. The internal `AudioC
 
 ---
 
-### `.destroy()`
+### `.destroy(options?)`
 
-Stops recording, releases all media tracks, closes `AudioContext` instances, and clears all state. Always call this when done to avoid memory leaks.
+Stops recording, closes internal `AudioContext` instances, and clears all state. Always call this when done to avoid memory leaks.
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `stopStreams` | `boolean` | `true` | When `true`, calls `stop()` on every track of the streams you passed to `create()` / `addAudioStream()`. Set to `false` to keep those streams alive (e.g. reuse the same microphone for another recording). |
+
+By default, `destroy()` releases the microphone and any other input tracks — same as today. If you own the `MediaStream` and want to keep it after teardown:
+
+```ts
+recorder.stop()
+recorder.destroy({ stopStreams: false })
+
+// stream is still active — safe to pass to a new AudioChunkify instance
+const next = new AudioChunkify()
+next.create(stream)
+```
+
+When unmounting a component or leaving a page, keep the default (`stopStreams: true`) so the browser releases the mic indicator.
 
 ---
 

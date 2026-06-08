@@ -57,3 +57,16 @@ export interface ChunkProcessedPayload {
  * Recorder state — mirrors the native MediaRecorder.state values.
  */
 export type RecorderState = 'inactive' | 'recording' | 'paused'
+
+/**
+ * Options passed to AudioChunkify.destroy().
+ */
+export interface DestroyOptions {
+  /**
+   * When `true` (default), calls `stop()` on every track of the streams
+   * passed to `create()` / `addAudioStream()`. Set to `false` when you
+   * plan to reuse those streams after tearing down the recorder
+   * (e.g. start a new recording with the same microphone).
+   */
+  stopStreams?: boolean
+}

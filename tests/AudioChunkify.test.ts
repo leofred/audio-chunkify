@@ -331,7 +331,7 @@ describe('AudioChunkify — stream mixing', () => {
 // ── Cleanup ─────────────────────────────────────────────────────────────────────
 
 describe('AudioChunkify — destroy', () => {
-  it('stops tracks and resets state', async () => {
+  it('stops tracks by default and resets state', async () => {
     const track = new MockMediaStreamTrack()
     const stream = new MockMediaStream([track])
     const { recorder } = createRecorder(stream)
@@ -342,6 +342,19 @@ describe('AudioChunkify — destroy', () => {
     expect(track.stop).toHaveBeenCalled()
     expect(recorder.getMediaRecorder()).toBeNull()
     expect(recorder.getStream()).toBeNull()
+    expect(recorder.getState()).toBe('inactive')
+  })
+
+  it('keeps input stream tracks when stopStreams is false', async () => {
+    const track = new MockMediaStreamTrack()
+    const stream = new MockMediaStream([track])
+    const { recorder } = createRecorder(stream)
+
+    await startWithData(recorder)
+    recorder.destroy({ stopStreams: false })
+
+    expect(track.stop).not.toHaveBeenCalled()
+    expect(recorder.getMediaRecorder()).toBeNull()
     expect(recorder.getState()).toBe('inactive')
   })
 })

@@ -6,6 +6,7 @@ import {
 import type {
   ChunkOptions,
   ChunkProcessedPayload,
+  DestroyOptions,
   RecorderCreateOptions,
   RecorderState,
 } from './types.js'
@@ -376,15 +377,22 @@ export class AudioChunkify {
   }
 
   /**
-   * Fully tears down the recorder: stops recording, releases all media tracks,
-   * closes AudioContexts and clears all internal state.
+   * Fully tears down the recorder: stops recording, closes AudioContexts
+   * and clears all internal state.
+   *
+   * By default also stops every track on the input streams. Pass
+   * `{ stopStreams: false }` to keep those streams alive for reuse.
    */
-  destroy(): void {
+  destroy(options: DestroyOptions = {}): void {
+    const { stopStreams = true } = options
+
     if (this._mediaRecorder?.state !== 'inactive') {
       this._mediaRecorder?.stop()
     }
 
-    this._audioStreams.forEach((s) => s.getTracks().forEach((t) => t.stop()))
+    if (stopStreams) {
+      this._audioStreams.forEach((s) => s.getTracks().forEach((t) => t.stop()))
+    }
 
     this._stopTimeTracking()
     this._recordingTime = 0
